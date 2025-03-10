@@ -1,0 +1,75 @@
+<div class="container">
+  <header>
+    <h1>📘 Address Book</h1>
+    <button class="add-btn" (click)="openForm()">+ Add Person</button>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of persons">
+        <td>{{ person.name }}</td>
+        <td>{{ person.address }}</td>
+        <td>{{ person.city }}</td>
+        <td>{{ person.state }}</td>
+        <td>{{ person.zipCode }}</td>
+        <td>{{ person.phone }}</td>
+        <td>
+          <button class="delete-btn" (click)="deletePerson(person.id)">
+            🗑
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Popup Form -->
+<div class="popup" *ngIf="showForm">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Person Address Form</h2>
+      <button class="close-btn" (click)="closeForm()">✖</button>
+    </div>
+
+    <div class="popup-body">
+      <input type="text" placeholder="Full Name" #name />
+      <input type="text" placeholder="Phone Number" #phone />
+      <textarea placeholder="Address" #address></textarea>
+      <div class="row">
+        <input type="text" placeholder="City" #city />
+        <input type="text" placeholder="State" #state />
+        <input type="text" placeholder="Zip Code" #zipCode />
+      </div>
+    </div>
+
+    <div class="popup-footer">
+      <button
+        class="add-btn"
+        (click)="
+          addPerson(
+            name.value,
+            phone.value,
+            address.value,
+            city.value,
+            state.value,
+            zipCode.value
+          )
+        "
+      >
+        Add
+      </button>
+      <button class="reset-btn" (click)="closeForm()">Reset</button>
+    </div>
+  </div>
+</div>
